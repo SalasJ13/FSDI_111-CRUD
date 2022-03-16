@@ -1,5 +1,9 @@
 from datetime import datetime
-from app.database import user
+from app.database import (
+    user,
+    vehicle,
+    report
+)
 
 from flask import (
     Flask,
@@ -28,6 +32,8 @@ def version():
         "server_time": datetime.now().strftime("%F %H:%M:S")
     }
     return resp
+
+# -----------------User-----------------
 
 
 @app.get("/users/<int:pk>")
@@ -68,5 +74,73 @@ def update_user(pk):
 
 @app.delete("/users/<int:pk>")
 def deactivate_user(pk):
-    user.deactvate(pk)
+    user_data = request.json
+    user.deactivate_user(pk)
+    return "", 204
+
+# -----------------Vehicle-----------------
+
+
+@app.get("/vehicle/users/<int:user_id>")
+def get_vehicle_by_user_id(user_id):
+    vehicle_list = vehicle.select_by_user_id(user_id)
+    resp = {
+        "status": "ok",
+        "message": "success",
+        "vehicles": vehicle_list
+    }
+    return resp
+
+
+@app.get("/reports/users/vehicle")
+def get_users_and_vehicles_report():
+    output = report.get_users_and_vehicles_join()
+    resp = {
+        "status": "ok",
+        "message": "success",
+        "vehicles": output
+    }
+    return resp
+# ------------------
+
+
+@app.get("/vehicles/<int:pk>")
+def get_vehicle_by_id(pk):
+    target_vehicle = vehicle.select_by_id(pk)
+    resp = {
+        "status": "ok",
+        "message": "success",
+        "vehicle": target_vehicle,
+    }
+    return resp
+
+
+@app.get("/vehicles/")
+def get_all_vehicles():
+    vehicle_list = vehicle.scan()
+    resp = {
+        "status": "ok",
+        "message": "success",
+        "vehicles": vehicle_list
+    }
+    return resp
+
+
+@app.post("/vehicles/")
+def create_vehicle():
+    vehicle_data = request.json
+    vehicle.insert(vehicle_data)
+    return "", 204
+
+
+@app.put("/vehicles/<int:pk>")
+def update_vehicle(pk):
+    vehicle_data = request.json
+    vehicle.update(pk, vehicle_data)
+    return "", 204
+
+
+@app.delete("/vehicles/<int:pk>")
+def deactivate_vehicle(pk):
+    vehicle.deactivate_vehicle(pk)
     return "", 204

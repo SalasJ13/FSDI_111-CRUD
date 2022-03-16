@@ -1,25 +1,14 @@
 import requests
 from pprint import pprint
 
+
 URL = "http://127.0.0.1:5000/users/"
 
 SAMPLE_USER = {
     "first_name": "Jaz",
     "last_name": "Salas",
-    "hobbies": "Leer",
+    "hobbies": "Read",
 }
-
-
-def update_user(user_id):
-    SAMPLE_USER["first_name"] = input("Enter a first name: ")
-    SAMPLE_USER["last_name"] = input("Enter a last name: ")
-    SAMPLE_USER["hobbies"] = input("Enter hobbies: ")
-    url = "%s%s" % (URL, user_id)
-    response = requests.put(url, json=SAMPLE_USER)
-    if response.status_code == 204:
-        print("User updated.")
-    else:
-        print("Error while trying to update user.")
 
 
 def get_user():
@@ -37,8 +26,17 @@ def get_user():
     return user.get("id")
 
 
+def deactivate_user(user_id):
+    url = "%s%s" % (URL, user_id)
+    response = requests.delete(url)
+    if response.status_code == 200 or 204:
+        print("User delete")
+    else:
+        print("Error")
+
+
 if __name__ == "__main__":
-    print("UPDATE USER")
-    print("-------------")
+    print("Delete User")
+    print("---------")
     user_id = get_user()
-    update_user(user_id)
+    deactivate_user(user_id)

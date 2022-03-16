@@ -1,0 +1,15 @@
+**********************Ejecutar un programa desde UBUNTU*****************************
+python3 tools/create_user.py
+        nombreCarpeta/nombrePrograma.py
+
+**********************Activar el Servidor SH *****************************
+cd ~/Code/SDGKU/user_crud
+source venv/bin/activate
+sh run_dev.sh
+
+**********************SQLite3*****************************
+
+1. sqlite3 user.bd INGRESAR DESDE LA TERMINAR
+2. select * from nombreTabla
+3. delete form nombreTabla SOLO SE ELIMINA LA INFO
+4. .tables MOSTRAR TODAS LAS TABLAS DELA bd 
