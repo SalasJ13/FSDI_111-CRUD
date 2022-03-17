@@ -30,23 +30,25 @@ def select_by_user_id(uid):
 def insert(vehicle_dict):
     value_tuple = (
         vehicle_dict["color"],
-        vehicle_dict["license_type"],
+        vehicle_dict["license_plate"],
         vehicle_dict["v_type"],
-        vehicle_dict["id"],
+        # vehicle_dict["id"],
         vehicle_dict["user_id"],
-        vehicle_dict["active"],
+        # vehicle_dict["active"],
     )
 
     stmt = """
         INSERT INTO vehicle (
         color,
-        license_type,
+        license_plate,
         v_type,
         user_id
-        ) VALUES (?, ?, ?)
+        
+        ) VALUES (?, ?, ?, ?)
     """
     cursor = get_db()
-    last_row_id = cursor.execute(stmt, value_tuple)
+    # last_row_id =
+    cursor.execute(stmt, value_tuple)
     cursor.commit()
     cursor.close()
 
@@ -69,17 +71,17 @@ def select_by_id(pk):
 
 def update(pk, vehicle_data):
     value_tuple = (
-        vehicle_data["color":],
-        vehicle_data["license_type"],
+        vehicle_data["color"],
+        vehicle_data["license_plate"],
         vehicle_data["v_type"],
         vehicle_data["user_id"],
         pk
     )
     stmt = """
-        UPDATE user
+        UPDATE vehicle
         SET 
         color=?,
-        license_type=?,
+        license_plate=?,
         v_type=?,
         user_id=?
         WHERE id=?
