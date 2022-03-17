@@ -78,6 +78,7 @@ def deactivate_user(pk):
     user.deactivate_user(pk)
     return "", 204
 
+
 # -----------------Vehicle-----------------
 
 
@@ -92,13 +93,13 @@ def get_vehicle_by_user_id(user_id):
     return resp
 
 
-@app.get("/reports/users/vehicle")
+@app.get("/reports/users/vehicles")
 def get_users_and_vehicles_report():
     output = report.get_users_and_vehicles_join()
     resp = {
         "status": "ok",
         "message": "success",
-        "vehicles": output
+        "report_date": output
     }
     return resp
 # ------------------
@@ -140,7 +141,9 @@ def update_vehicle(pk):
     return "", 204
 
 
+
 @app.delete("/vehicles/<int:pk>")
 def deactivate_vehicle(pk):
     vehicle.deactivate_vehicle(pk)
     return "", 204
+
