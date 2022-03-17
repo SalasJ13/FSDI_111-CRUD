@@ -5,19 +5,21 @@ URL = "http://127.0.0.1:5000/vehicles/"
 
 SAMPLE_VEHICLE = {
     "color": "gray",
-    "license_type": "Type1",
-    "v_type": "bicycle"
+    "license_plate": "Type1",
+    "v_type": "1",
+    "user_id": "1"
 }
 
 
 def update_vehicle(vehicleId):
     SAMPLE_VEHICLE["color"] = input("Enter a color: ")
-    SAMPLE_VEHICLE["license_type"] = input("Enter a license type: ")
+    SAMPLE_VEHICLE["license_plate"] = input("Enter a license_plate: ")
     SAMPLE_VEHICLE["v_type"] = input("Enter a vehicle type: ")
+    SAMPLE_VEHICLE["user_id"] = input("Enter a vehicle user_id: ")
     url = "%s%s" % (URL, vehicleId)
     response = requests.put(url, json=SAMPLE_VEHICLE)
     if response.status_code == 204:
-        print("Vehiccle updated")
+        print("Vehicle updated")
     else:
         print("Error")
 
@@ -42,3 +44,4 @@ if __name__ == "__main__":
     print("---------")
     vehicleId = get_vehicle()
     update_vehicle(vehicleId)
+
