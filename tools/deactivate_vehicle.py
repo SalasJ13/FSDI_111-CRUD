@@ -5,18 +5,10 @@ URL = "http://127.0.0.1:5000/vehicles/"
 
 SAMPLE_VEHICLE = {
     "color": "gray",
-    "license_type": "Type1",
-    "v_type": "bicycle"
+    "license_plate": "Type1",
+    "v_type": "1",
+    "user_id": "1"
 }
-
-
-def deactivate_vehicle(vehicleId):
-    url = "%s%s" % (URL, vehicleId)
-    response = requests.delete(url)
-    if response.status_code == 204:
-        print("Vehicle delete")
-    else:
-        print("Error")
 
 
 def get_vehicle():
@@ -30,12 +22,21 @@ def get_vehicle():
         print("Vehicle: ")
         pprint(vehicle)
     else:
-        print("Errors while trying to retrieve vehicle")
+        print("Error")
     return vehicle.get("id")
+
+
+def deactivate_vehicle(vehicleId):
+    url = "%s%s" % (URL, vehicleId)
+    response = requests.delete(url)
+    if response.status_code == 204:
+        print("Vehicle delete")
+    else:
+        print("Error")
 
 
 if __name__ == "__main__":
     print("DELETE VEHICLE")
-    print("---------")
+    print("------")
     vehicleId = get_vehicle()
     deactivate_vehicle(vehicleId)
