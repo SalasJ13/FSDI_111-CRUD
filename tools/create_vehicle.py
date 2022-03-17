@@ -5,18 +5,21 @@ URL = "http://127.0.0.1:5000/vehicles/"
 
 SAMPLE_VEHICLE = {
     "color": "gray",
-    "license_type": "Type1",
-    "v_type": "bicycle"
+    "license_plate": "Type1",
+    "v_type": "1",
+    "user_id": "1"
 }
 
 
 def create_vehicle():
     color = input("Enter a color: ")
-    license_type = input("Enter a license type: ")
-    vehicle_type = input("Enter a vehicle type: ")
+    license_plate = input("Enter a license_plate: ")
+    v_type = input("Enter a vehicle type: ")
+    user_id = input("Enter a user_id: ")
     SAMPLE_VEHICLE["color"] = color
-    SAMPLE_VEHICLE["license_type"] = license_type
-    SAMPLE_VEHICLE["v_type"] = vehicle_type
+    SAMPLE_VEHICLE["license_plate"] = license_plate
+    SAMPLE_VEHICLE["v_type"] = v_type
+    SAMPLE_VEHICLE["user_id"] = user_id
     response = requests.post(URL, json=SAMPLE_VEHICLE)
     if response.status_code == 204:
         print("Vehicle create.")
